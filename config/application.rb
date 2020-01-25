@@ -11,8 +11,13 @@ module TweetApp
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
+    # Railsのタイムゾーン設定
     config.time_zone = 'Asia/Tokyo'
+    # データベースのタイムゾーン設定
     config.active_record.default_timezone = :local
+
+    # メッセージの日本語
+    config.i18n.default_locale = :ja
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
