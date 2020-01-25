@@ -13,11 +13,12 @@ class PostsController < ApplicationController
 
   def create
   	@post = Post.new(content: params[:content])
+
   	if @post.save
   		flash[:notice] = "投稿を作成しました"
   		redirect_to posts_path
   	else
-  		render posts_new_path
+  		render :new
   	end
   end
 
@@ -28,6 +29,7 @@ class PostsController < ApplicationController
   def update
   	@post = Post.find_by(id: params[:id])
   	@post.content = params[:content]
+
   	if @post.save
   		flash[:notice] = "投稿を編集しました"
   		redirect_to posts_path
