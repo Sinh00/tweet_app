@@ -11,9 +11,11 @@ default: &default
   adapter: mysql2
   database: tweet_app
   username: root
-  password: 
+  password: sysadm
   host: 127.0.0.1
+  charset: utf8
   encoding: utf8
+  host: db # docker-compose.ymlのdbにあたる
 
 development:
   <<: *default
