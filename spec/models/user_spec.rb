@@ -52,24 +52,29 @@ RSpec.describe User, type: :model do
   end
 
   describe 'アソシエーションテスト' do
+    # factorybotを使った場合
+    subject(:user) { create(:user)}
+    it { is_expected.to have_many(:posts) }
+    it { is_expected.to have_many(:likes) }
   end
 
   describe 'クラスメソッドテスト' do    
   end
 
   describe 'インスタンスメソッドテスト' do
-    let!(:user) { User.create!(params) }
-    let!(:params) { { name: 'tarou', email: 'test@test.com', password: 'password' } }
-    let!(:post1) { Post.create!(user_id: user.id, content: '投稿1です') }
-    let!(:post2) { Post.create!(user_id: user.id, content: '投稿2です') }
+    # モデルのアソシエーションを設定したので不要
+    # let!(:user) { User.create!(params) }
+    # let!(:params) { { name: 'tarou', email: 'test@test.com', password: 'password' } }
+    # let!(:post1) { Post.create!(user_id: user.id, content: '投稿1です') }
+    # let!(:post2) { Post.create!(user_id: user.id, content: '投稿2です') }
 
-    context 'postsメソッドを呼び出す場合' do
-      it '紐づく投稿データが参照できる' do
-        # 件数が2件
-        expect(user.posts.count).to eq 2
-        # 取得順が作成日の降順
-        expect(user.posts.first).to eq post2
-      end
-    end
+    # context 'postsメソッドを呼び出す場合' do
+    #   it '紐づく投稿データが参照できる' do
+    #     # 件数が2件
+    #     expect(user.posts.count).to eq 2
+    #     # 取得順が作成日の降順
+    #     expect(user.posts.first).to eq post2
+    #   end
+    # end
   end
 end

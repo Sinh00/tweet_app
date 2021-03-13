@@ -1,13 +1,14 @@
 class Post < ApplicationRecord
+  ##### アソシエーション ##########
+  belongs_to :user
+  has_many :likes, dependent: :destroy
+  has_many :liked_users, through: :likes, source: :user
 
-	validates :content, {presence: true, length: {maximum: 140}}
-	validates :user_id, {presence: true}
+  ##### バリデーション ##########
+	validates :content, { presence: true, length: { maximum: 140 } }
 
-	def user
-    User.find_by(id: self.user_id)
-  end
-
+  ##### インスタンスメソッド ##########
   def likes_count
-  	Like.where(post_id: self.id).count
+  	self.likes.count
   end
 end
