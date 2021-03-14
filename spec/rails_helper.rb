@@ -6,6 +6,7 @@ require File.expand_path('../config/environment', __dir__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'shoulda/matchers'
+# require 'capybara/rspec'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -21,7 +22,7 @@ require 'shoulda/matchers'
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -65,6 +66,15 @@ RSpec.configure do |config|
 
   # Rspec内でFactoryBotのメソッドを使用する際、「FactoryBot.」を省略できる
   config.include FactoryBot::Syntax::Methods
+
+  # jsを使用しないテストの場合は、高速なRack::Testドライバを使用
+  # config.before(:each, type: :system) do
+  #   driven_by :rack_test
+  # end
+  # # jsを使用するsystem specの場合はchromeのヘッドレスドライバを使用するよう設定する。
+  # config.before(:each, type: :system, js: true) do
+  #   driven_by :selenium_chrome_headless
+  # end
 end
 
 Shoulda::Matchers.configure do |config|

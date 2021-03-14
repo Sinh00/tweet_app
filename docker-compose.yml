@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 services:
   db:
     image: mysql:5.7
@@ -9,8 +9,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql # データを永続化するために必要
     ports:
-      - "4306:3306"
-
+      - '4306:3306'
 
   web:
     build: .
@@ -19,11 +18,16 @@ services:
       - .:/tweet_app
       - bundle:/usr/local/bundle # bundle installを毎回しなくて良くなる
     ports:
-      - "3000:3000"
+      - '3000:3000'
     links:
       - db
+    environment:
+      - 'SELENIUM_DRIVER_URL=http://selenium_chrome:4444/wd/hub' # System Specに必要
 
-      
+  # System Specを動作させるためのコンテナイメージ
+  selenium_chrome:
+    image: selenium/standalone-chrome-debug
+
 volumes:
   mysql-data:
   bundle:
