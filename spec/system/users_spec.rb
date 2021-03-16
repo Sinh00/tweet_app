@@ -41,19 +41,19 @@ RSpec.describe 'Users', type: :system do
       end
     end
 
-    # describe 'ユーザ編集' do
-    #   it 'ユーザ情報の更新ができること' do
-    #     visit edit_user_path(user)
-    #     fill_in 'name', with: 'fixed_name'
-    #     fill_in 'email', with: 'fixed_email@test.com'
-    #     click_button '保存'
+    describe 'ユーザ編集' do
+      it 'ユーザ情報の更新ができること' do
+        visit edit_user_path(user)
+        fill_in 'name', with: 'fixed_name'
+        fill_in 'email', with: 'fixed_email@test.com'
+        click_button '保存'
 
-    #     expect(current_path).to eq user_path(user)
-    #     expect(page).to have_content 'ユーザー情報を編集しました'
-    #     expect(page).to have_content 'fixed_name'
-    #     expect(page).to have_content 'fixed_email@test.com'
-    #   end
-    # end
+        expect(current_path).to eq user_path(user)
+        expect(page).to have_content 'ユーザー情報を編集しました'
+        expect(page).to have_content 'fixed_name'
+        expect(page).to have_content 'fixed_email@test.com'
+      end
+    end
   end
 
 end

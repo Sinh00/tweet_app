@@ -10,4 +10,16 @@ RSpec.configure do |config|
     Capybara.server_host = 'web'
     Capybara.app_host='http://web'
   end
+
+  config.prepend_after(:each, type: :system) do
+    Capybara.reset_sessions!
+  end
+end
+
+# メモリ不足対策にブラウザのサイズを小さくする
+Capybara.register_driver :selenium_chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('headless')
+  options.add_argument('window-size=1440,990')
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
