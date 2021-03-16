@@ -1,9 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :system do
-  # before do
-  #   @user = User.create!(:user)
-  # end
+  subject(:user) { create(:user) }
+
+  describe 'ログイン前' do
+    
+  end
+
+  describe 'ログイン後' do
+    
+  end
 
   it 'ログイン画面が表示される' do
     # User編集画面を開く
