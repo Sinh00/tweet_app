@@ -2,7 +2,26 @@
   <div class="container">
     <% @posts.each do |post| %>
       <div class="posts-index-item">
-        <%= post.content %>
+      	<div class="post-left">
+          <%= link_to(user_path(id: post.user.id)) do %>
+            <img src="<%= "/user_images/#{post.user.image_name}" %>">
+          <% end %>
+        </div>
+        <div class="post-right">
+          <div class="post-user-name">
+            <%= link_to(post.user.name, user_path(id: post.user.id)) %>
+            <span class="post-time"><%= post.created_at.strftime("%-m/%d %-H:%M") %></span class="post-time">
+          </div>
+        	<%= link_to(simple_format(post.content), post_path(post)) %>
+          <div>
+            <% if Like.find_by(user_id: post.user.id, post_id: post.id) %>
+              <span class="fa fa-heart like-btn-unlike"></span>
+            <% else %>
+              <span class="fa fa-heart like-btn"></span>
+            <% end %>
+            <%= post.likes_count %>
+          </div>
+        </div>
       </div>
     <% end %>
   </div>

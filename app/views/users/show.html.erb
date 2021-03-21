@@ -1,0 +1,33 @@
+<div class="main user-show">
+  <div class="container">
+    <div class="user">
+    	<img src="<%= "/user_images/#{@user.image_name}" %>">
+      <h2><%= @user.name %></h2>
+      <p><%= @user.email %></p>
+      <% if @user.id == @current_user.id %>
+      	<%= link_to("編集", edit_user_path(@user)) %>
+      <% end %>
+    </div>
+
+    <ul class="user-tabs">
+      <li class="active"><%= link_to("ツイート", user_path(@user)) %></li>
+      <li><%= link_to("いいね", likes_user_path(@user)) %></li>
+    </ul>
+
+    <% @user.posts.each do |post| %>
+      <div class="posts-index-item">
+        <div class="post-left">
+          <%= link_to(user_path(post.user)) do %>
+            <img src="<%= "/user_images/#{post.user.image_name}" %>">
+          <% end %>
+        </div>
+        <div class="post-right">
+          <div class="post-user-name">
+            <%= link_to(post.user.name, user_path(post.user)) %>
+          </div>
+          <%= link_to(simple_format(post.content), post_path(post)) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
